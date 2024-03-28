@@ -3,10 +3,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			character: [],
 			characterData: {},
+			characterDesc: "",
 			planet: [],
 			planetData: {},
+			planetDesc: "",
 			ship: [],
 			shipData: [],
+			shipDesc: "",
 			favorites: []
 		},
 		actions: {
@@ -23,9 +26,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("https://www.swapi.tech/api/people/" + id)
 					.then(res => res.json())
 					.then(data => setStore({
-						characterData: data.result.properties
+						characterData: data.result.properties,
+						characterDesc: data.result.description,
 					}))
 					.catch(err => console.error(err))
+			},
+
+			fetchDetailChar: async (id) => {
+				const response = await fetch(
+					"https://www.swapi.tech/api/people/" + id
+				)
+				const body = await response.json();
+				const person = body.result;
+				return person;
 			},
 			fetchPlanets: () => {
 				fetch("https://www.swapi.tech/api/planets/")
@@ -39,26 +52,47 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("https://www.swapi.tech/api/planets/" + id)
 					.then(res => res.json())
 					.then(data => setStore({
-						planetData: data.result.properties
+						planetData: data.result.properties,
+						planetDesc: data.result.description
 					}))
 					.catch(err => console.error(err))
 			},
-			fetchShips: () => {
-				fetch("https://www.swapi.tech/api/starships/")
+
+			fetchDetailPlanets: async (id) => {
+				const response = await fetch(
+					"https://www.swapi.tech/api/planets/" + id
+				)
+				const body = await response.json();
+				const planet = body.result;
+				return planet;
+			},
+			fetchVeh: () => {
+				fetch("https://www.swapi.tech/api/vehicles/")
 					.then(res => res.json())
 					.then(data => setStore({
 						ship: data.results
 					}))
 					.catch(err => console.error(err))
 			},
-			fetchShipData: (id) => {
-				fetch("https://www.swapi.tech/api/starships/" + id)
+			fetchVehData: (id) => {
+				fetch("https://www.swapi.tech/api/vehicles/" + id)
 					.then(res => res.json())
 					.then(data => setStore({
-						shipData: data.result.properties
+						shipData: data.result.properties,
+						shipDesc: data.result.description
 					}))
 					.catch(err => console.error(err))
 			},
+
+			fetchDetailVeh: async (id) => {
+				const response = await fetch(
+					"https://www.swapi.tech/api/vehicles/" + id
+				)
+				const body = await response.json();
+				const vehicle = body.result;
+				return vehicle;
+			},
+
 			addFavorite: (item) => {
 				if (getStore().favorites.some(elem => elem.name === item.name)) {
 					getActions().quitFavorite(item);

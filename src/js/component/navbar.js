@@ -1,22 +1,25 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext.js";
+import "../../styles/card.css"
+
 
 export const Navbar = () => {
 	const { store, setStore, actions } = useContext(Context);
 	return (
-		<nav className="navbar navbar-black bg-black p-2">
+		<nav className="navbar navbar-black bg-black p-2 cardStyle">
 			<Link to="/">
 				<span className="navbar-brand mb-0 h1">
 					<img
-						src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/1280px-Star_Wars_Logo.svg.png"
+						src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/2560px-Star_Wars_Logo.svg.png"
 						width="90"
 						height="54"
 					/>
 				</span>
 			</Link>
+			<span className="mainTitle">A long time ago in a galaxy far, far away....</span>
 			<div className="ml-auto">
-				{<button className="btn btn-outline-warning nav-item dropdown p-0">
+				{<button className="btn btn-outline-warning mainTitle nav-item dropdown p-0">
 					<a
 						className="nav-link dropdown-toggle"
 						href="#"
@@ -25,7 +28,7 @@ export const Navbar = () => {
 						aria-expanded="false"
 						style={{ color: "white" }}
 					>
-						Favorites
+						Favorites  {store.favorites.length}
 					</a>
 					<ul
 						className="dropdown-menu p-1"
