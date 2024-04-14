@@ -5,7 +5,7 @@ import "../../styles/card.css"
 
 
 export const Navbar = () => {
-	const { store, setStore, actions } = useContext(Context);
+	const { store, actions } = useContext(Context);
 	return (
 		<nav className="navbar navbar-black bg-black p-2 cardStyle">
 			<Link to="/">

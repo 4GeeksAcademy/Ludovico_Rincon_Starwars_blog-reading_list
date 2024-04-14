@@ -3,11 +3,10 @@ import { Card } from "../component/characterCard.js";
 import { PlanetCard } from "../component/planetcard.js";
 import { VehicleCard } from "../component/vehiclecard.js";
 import { Context } from "../store/appContext.js"
-import "../../styles/home.css"
 import "../../styles/card.css"
 
 export const Home = () => {
-	const { store, actions } = useContext(Context);
+	const { store} = useContext(Context);
 	return (
 		<div className="card-group bg-dark p-4 cardGroupStyle">
 			<h2 className="mainTitle" >Characters</h2>

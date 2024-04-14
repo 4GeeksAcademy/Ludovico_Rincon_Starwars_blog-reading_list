@@ -2,12 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 import "../../styles/card.css"
-
 export const Card = ({ name, id, item }) => {
-    const { store, actions } = useContext(Context);
+    const { actions } = useContext(Context);
     const viewType = "/characterview/";
     const [detailCard, setDetailCard] = useState();
-
+    const url = "https://starwars-visualguide.com/assets/img/characters/"
     useEffect(() => {
         actions.fetchDetailChar(id)
             .then(detailChar => setDetailCard(detailChar));
@@ -16,7 +15,7 @@ export const Card = ({ name, id, item }) => {
     return (
         detailCard !== undefined ? (
             <div className="card mx-1 bg-black text-white cardSize">
-                <img src={"https://starwars-visualguide.com/assets/img/characters/" + (id) + ".jpg"} className="card-img-top" alt="..."></img>
+                <img src={url + (id) + ".jpg"} className="card-img-top" alt="..."></img>
                 <div className="card-body mb-0">
                     <h5 className="card-title mainTitle">{name}</h5>
                     <p className="card-text mb-1">Gender: {detailCard.properties.gender} </p>

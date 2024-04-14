@@ -7,6 +7,7 @@ import "../../styles/card.css"
 export const CharacterView = (props) => {
   const { store, actions } = useContext(Context);
   const params = useParams();
+  const url =  "https://starwars-visualguide.com/assets/img/characters/"
 
   useEffect(() => actions.fetchCharactersData(params.theid), [store.characterData]);
 
@@ -14,7 +15,7 @@ export const CharacterView = (props) => {
     <div className="cardBack d-flex flex-column flex-md-row h-100 p-4 m-4 border border-warning border rounded">
       <img
         src={
-          "https://starwars-visualguide.com/assets/img/characters/" +
+          url +
           params.theid +
           ".jpg"
         }
