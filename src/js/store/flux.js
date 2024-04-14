@@ -1,4 +1,5 @@
 const getState = ({ getStore, getActions, setStore }) => {
+	const url = "https://www.swapi.tech/api"
 	return {
 		store: {
 			character: [],
@@ -13,9 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			favorites: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
 			fetchCharacters: () => {
-				fetch("https://www.swapi.tech/api/people/")
+				fetch(url + "/people/")
 					.then(res => res.json())
 					.then(data => setStore({
 						character: data.results
@@ -23,7 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(err => console.error(err))
 			},
 			fetchCharactersData: (id) => {
-				fetch("https://www.swapi.tech/api/people/" + id)
+				fetch(url + "/people/" + id)
 					.then(res => res.json())
 					.then(data => setStore({
 						characterData: data.result.properties,
@@ -34,14 +34,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			fetchDetailChar: async (id) => {
 				const response = await fetch(
-					"https://www.swapi.tech/api/people/" + id
+					url + "/people/" + id
 				)
 				const body = await response.json();
 				const person = body.result;
 				return person;
 			},
 			fetchPlanets: () => {
-				fetch("https://www.swapi.tech/api/planets/")
+				fetch(url + "/planets/")
 					.then(res => res.json())
 					.then(data => setStore({
 						planet: data.results
@@ -49,7 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(err => console.error(err))
 			},
 			fetchPlanetsData: (id) => {
-				fetch("https://www.swapi.tech/api/planets/" + id)
+				fetch(url + "/planets/" + id)
 					.then(res => res.json())
 					.then(data => setStore({
 						planetData: data.result.properties,
@@ -60,14 +60,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			fetchDetailPlanets: async (id) => {
 				const response = await fetch(
-					"https://www.swapi.tech/api/planets/" + id
+					url + "/planets/" + id
 				)
 				const body = await response.json();
 				const planet = body.result;
 				return planet;
 			},
 			fetchVeh: () => {
-				fetch("https://www.swapi.tech/api/vehicles/")
+				fetch(url + "/vehicles/")
 					.then(res => res.json())
 					.then(data => setStore({
 						ship: data.results
@@ -75,7 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(err => console.error(err))
 			},
 			fetchVehData: (id) => {
-				fetch("https://www.swapi.tech/api/vehicles/" + id)
+				fetch(url + "/vehicles/" + id)
 					.then(res => res.json())
 					.then(data => setStore({
 						shipData: data.result.properties,
@@ -86,7 +86,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			fetchDetailVeh: async (id) => {
 				const response = await fetch(
-					"https://www.swapi.tech/api/vehicles/" + id
+					url + "/vehicles/" + id
 				)
 				const body = await response.json();
 				const vehicle = body.result;
@@ -111,9 +111,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(`${item.name} removed from your favorites.`);
 			}
 
-
-		} // End actions
-	}; // End return
-}; // End getState
+		}
+	};
+};
 
 export default getState;

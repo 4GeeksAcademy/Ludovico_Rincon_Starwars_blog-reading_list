@@ -7,14 +7,14 @@ import "../../styles/card.css"
 export const Vehicleview = (props) => {
     const { store, actions } = useContext(Context);
     const params = useParams();
-
+    const url = "https://starwars-visualguide.com/assets/img/vehicles/"
     useEffect(() => actions.fetchVehData(params.theid), [store.shipData], [store.shipDesc]);
 
     return (
         <div className="cardBack d-flex flex-column flex-md-row h-75 p-4 m-4 border border-warning border rounded">
             <img
                 src={
-                    "https://starwars-visualguide.com/assets/img/vehicles/" +
+                    url +
                     params.theid +
                     ".jpg"
                 }
